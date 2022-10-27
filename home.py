@@ -7,6 +7,8 @@ server = os.environ["MLFLOW_TRACKING_SERVER"]
 
 st.title("Spotlight Model Management")
 
+st.write(server)
+
 models = requests.get("{server}/2.0/preview/mlflow/registered-models/list")
 
 st.write(models)
