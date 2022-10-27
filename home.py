@@ -17,7 +17,7 @@ st.write(password)
 auth = HTTPBasicAuth(user, password)
 
 if st.button("Click"):
-    models = requests.get("{server}/api/2.0/preview/mlflow/registered-models/list", auth = auth)
+    models = requests.get(f"{server}/api/2.0/preview/mlflow/registered-models/list", auth = auth)
 
     st.write(models)
 
