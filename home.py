@@ -5,18 +5,23 @@ from requests.auth import HTTPBasicAuth
 import os
 
 server = os.environ["MLFLOW_TRACKING_SERVER"]
+user = os.environ["MLFLOW_TRACKING_USERNAME"]
+password = os.environ["MLFLOW_TRACKING_PASSWORD"]
 
 st.title("Spotlight Model Management")
 
 st.write(server)
+st.write(user)
+st.write(password)
 
-auth = HTTPBasicAuth(os.environ["MLFLOW_TRACKING_USERNAME"], os.environ["MLFLOW_TRACKING_PASSWORD"])
+auth = HTTPBasicAuth(user, password)
 
-models = requests.get("{server}/api/2.0/preview/mlflow/registered-models/list", auth = auth)
+if st.button("Click"):
+    models = requests.get("{server}/api/2.0/preview/mlflow/registered-models/list", auth = auth)
 
-st.write(models)
+    st.write(models)
 
-models_df = pd.DataFrame(models)
-st.dataframe(models_df)
+    models_df = pd.DataFrame(models)
+    st.dataframe(models_df)
 
-model_details = st.text_input("Model to check","")
+    model_details = st.text_input("Model to check","")
